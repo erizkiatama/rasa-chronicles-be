@@ -5,6 +5,10 @@ const appConfig = registerAs('app', () => ({
   env: 'production',
   name: 'rasa-chronicles-be',
   port: 8000,
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expiryTime: process.env.JWT_EXPIRY_TIME,
+  },
 }));
 
 const dbConfig = registerAs('db', () => ({

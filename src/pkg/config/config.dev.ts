@@ -4,6 +4,10 @@ const appConfig = registerAs('app', () => ({
   env: 'development',
   name: 'rasa-chronicles-be',
   port: 8000,
+  jwt: {
+    secret: 'l46zkflLofyZlDvcyAly5cWQeQ82kMRM',
+    expiryTime: '1d',
+  },
 }));
 
 const dbConfig = registerAs('db', () => ({
