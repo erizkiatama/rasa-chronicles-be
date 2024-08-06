@@ -11,11 +11,7 @@ const appConfig = registerAs('app', () => ({
 }));
 
 const dbConfig = registerAs('db', () => ({
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'postgres',
-  database: 'rasa-chronicles',
+  url: 'postgresql://postgres:postgres@localhost:5432/rasa-chronicles?schema=public',
 }));
 
 const adminConfig = registerAs('admin', () => ({

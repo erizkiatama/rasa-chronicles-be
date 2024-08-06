@@ -1,5 +1,4 @@
 import { registerAs } from '@nestjs/config';
-import * as process from 'node:process';
 
 const appConfig = registerAs('app', () => ({
   env: 'production',
@@ -12,11 +11,7 @@ const appConfig = registerAs('app', () => ({
 }));
 
 const dbConfig = registerAs('db', () => ({
-  host: process.env.DATABASE_HOST,
-  port: Number(process.env.DATABASE_PORT),
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  database: 'rasa-chronicles',
+  url: process.env.DATABASE_URL,
 }));
 
 const adminConfig = registerAs('admin', () => ({
