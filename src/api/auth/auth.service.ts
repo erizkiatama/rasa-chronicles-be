@@ -2,6 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
+import { AuthResponseDto } from './auth.dto';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -9,12 +11,15 @@ export class AuthService {
     private jwt: JwtService,
   ) {}
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string): Promise<AuthResponseDto> {
     if (username !== this.config.get('admin.username') || password !== this.config.get('admin.password')) {
       throw new UnauthorizedException('username or password is incorrect');
     }
 
-    return { access_token: await this.signToken() };
+    const response = new AuthResponseDto();
+    response.accessToken = await this.signToken();
+
+    return response;
   }
 
   async signToken(): Promise<string> {

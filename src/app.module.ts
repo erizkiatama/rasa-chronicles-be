@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { devConfigs } from './pkg/config/config.dev';
-import { prodConfigs } from './pkg/config/config.prod';
 import { AuthModule } from './api/auth/auth.module';
+
+import { devConfigs, prodConfigs } from './pkg/config';
+import { UserModule } from './api/user/user.module';
+import { PrismaModule } from './pkg/database/prisma.module';
 
 const config = process.env.NODE_ENV === 'production' ? prodConfigs : devConfigs;
 
@@ -12,7 +14,9 @@ const config = process.env.NODE_ENV === 'production' ? prodConfigs : devConfigs;
       load: [...config],
       isGlobal: true,
     }),
+    PrismaModule,
     AuthModule,
+    UserModule,
   ],
 })
 export class AppModule {}
